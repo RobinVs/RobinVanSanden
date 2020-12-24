@@ -1,6 +1,8 @@
 <?php
 $_SESSION['login'] = false; 
 session_start();
+include '../script/dbConnect.php';
+include '../script/functions.php';
 ?>
 <html>
 <head>
@@ -8,7 +10,7 @@ session_start();
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>Robin Van Sanden</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
-<link rel="stylesheet" href="./style/stylesheet.css">
+<link rel="stylesheet" href="../style/stylesheet.css">
 </head>
 <body>
 <div class="container">
@@ -23,29 +25,29 @@ session_start();
         </svg>
         <ul class="navbar-nav mr-auto">
             <li class="nav-item">
-                <a class="nav-link" href="index.php">
+                <a class="nav-link" href="../index.php">
                     Home
                 </a>
             </li>
             <?php
             if($_SESSION['login']==true){ 
             echo '<li class="nav-item">';
-            echo '<a class="nav-link" href="./html/main.php">';
-            echo '       Insert';
-            echo '   </a>';
+            echo '<a class="nav-link" href="../html/main.php">';
+                echo 'Insert';
+            echo '</a>';
             echo '</li>';
             }
             else{ 
                 echo '<li class="nav-item">';
-                echo '<a class="nav-link disabled" href="./html/main.php">';
+                echo '<a class="nav-link disabled" href="../html/main.php">';
                 echo '       Insert';
                 echo '   </a>';
                 echo '</li>';
             }
             ?>
             <li class="nav-item">
-                <a class="nav-link" href="./html/login.php">
-                    register
+                <a class="nav-link" href="../html/login.php">
+                    Register
                 </a>
             </li>
         </ul>
@@ -54,61 +56,33 @@ session_start();
             <a class="nav-link dropdown-toggle" href="#" id="navDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             Login
             </a>
-            <form method="post" action="./script/functions.php" class="dropdown-menu" aria-labelledby="navDropdown">
+            <form method="post" action="../script/functions.php" class="dropdown-menu" aria-labelledby="navDropdown">
                 <input class="dropdown-item" type="text" placeholder="username" name="loginName"><br>
                 <input class="dropdown-item" type="password" placeholder="Paswoord" name="pswrd"><br>
                 <div class="dropdown-divider"></div>
                 <div class="btn-nav">
                     <button class="btn btn-primary" type="submit" name="log">
                     Login
-                    </button>
-                    <button class="btn btn-primary" type="submit" name="destroy">
-                    Logout
-                    </button>
+                    </button> 
                 </div>
             </form>
             </li>
         </ul>
     </div>
 </div>
-<?php
-include './script/dbConnect.php';
-include './script/functions.php';
-$query = str($Connect);
-echo '<div class="row">';
-foreach ($query as $post){
-    echo '<div class="container bg-light text-dark col-sd-3 col-12 col-md-4 mt-3 pl-0 pr-0" id="'.$post['id'].'">';
-    echo '<header class="bg-primary text-light pl-2">';
-    echo '<p>'.$post['names'].'<br>';
-    echo $post['date'].'</p>';
-    echo '</header>';
-    echo '<p class="pl-2">'.$post['posted'].'</p>';
-    echo '<div class="container">&nbsp;<br>&nbsp;</div>';
-    if($_SESSION['user'] == $post['names']){ 
-    echo '<footer class="bg-primary text-light mb-0">';
-    echo '<a href="./script/functions.php?del='.$post['id'].'"><button class="btn btn-primary btn-sm">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash ml-3 mt-2 mb-2" viewBox="0 0 16 16">
-            <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
-            <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4L4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
-            </svg>
-        </button></a>';
-    echo '<a href="./html/update.php?Upd='.$post['id'].'"><button class="btn btn-primary btn-sm">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil ml-3 mt-2 mb-2" viewBox="0 0 16 16">
-            <path fill-rule="evenodd" d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168l10-10zM11.207 2.5L13.5 4.793 14.793 3.5 12.5 1.207 11.207 2.5zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293l6.5-6.5zm-9.761 5.175l-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325z"/>
-            </svg>
-        </button></a>';
-    echo '</footer>';
-    } else{
-        echo '<footer class="bg-primary text-light mb-0">
-        <button class="btn btn-sm invisible">
-        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil ml-3 mt-2 mb-2" viewBox="0 0 16 16">
-        <path fill-rule="evenodd" d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168l10-10zM11.207 2.5L13.5 4.793 14.793 3.5 12.5 1.207 11.207 2.5zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293l6.5-6.5zm-9.761 5.175l-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325z"/>
-        </button></svg></footer>';
-    } 
-    echo '</div>';
-};
-echo '</div>';
-?>
+<div class="container col-12 col-md-6 mt-3">
+<form method="post" action="../script/functions.php">
+    <div class="form-group">
+        <label for="name" class="font-weight-bold">Name or Nickname</label>
+        <input class="form-control" type="text" placeholder="Naam" name="name">
+        <label for="posted" class="font-weight-bold">Password:</label><br>
+        <input class="form-control" type="password" placeholder="Wachtwoord" name="passw"><br>
+        <label for="posted" class="font-weight-bold">Post here your first comment</label>
+        <textarea name="posted" id="posted1" cols="58" rows="10"></textarea><br>
+        <button class="btn btn-primary mt-3" name="register" type="submit">Login</button>
+    </div>
+</form>
+</div>
 </div>
 </div>
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>

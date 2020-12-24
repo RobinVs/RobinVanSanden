@@ -1,0 +1,40 @@
+body {
+    background: linear-gradient(120deg, #e8a768, #489652, #5d53e8, #e85353);
+    background-size: 1600% 1600%;
+    color:#ffffff; 
+    -webkit-animation: AnimationName 30s ease infinite;
+    -moz-animation: AnimationName 30s ease infinite;
+    animation: AnimationName 30s ease infinite;
+}
+
+@-webkit-keyframes AnimationName {
+    0%{background-position:0% 33%}
+    50%{background-position:100% 40%}
+    100%{background-position:0% 33%}
+}
+@-moz-keyframes AnimationName {
+    0%{background-position:0% 33%}
+    50%{background-position:100% 40%}
+    100%{background-position:0% 33%}
+}
+@keyframes AnimationName {
+    0%{background-position:0% 33%}
+    50%{background-position:100% 40%}
+    100%{background-position:0% 33%}
+}
+.navbar.bg-light{
+    background-color: rgba(255, 255, 255, 0.3) !important;
+}
+.navbar-toggler-icon{
+    border: solid black 1px !important;
+    border-radius: 5px !important;
+}
+.container.bg-light.text-dark{
+    background-color: rgba(255, 255, 255, 0.4) !important;
+}
+footer{
+    position: absolute;
+    display: inline-block;
+    bottom: 0;
+    width: 100%;
+} 
