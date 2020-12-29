@@ -79,7 +79,7 @@ include '../script/functions.php';
         <input class="form-control" type="password" placeholder="Wachtwoord" name="passw"><br>
         <label for="posted" class="font-weight-bold">Post here your first comment</label>
         <textarea name="posted" id="posted1" cols="58" rows="10"></textarea><br>
-        <button class="btn btn-primary mt-3" name="register" type="submit">Login</button>
+        <button class="btn btn-primary mt-3" name="register" type="submit">Register and post</button>
     </div>
 </form>
 </div>
